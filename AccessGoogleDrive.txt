@@ -1,0 +1,22 @@
+function myFunction() {
+  var files = DriveApp.getFiles();
+  while(files.hasNext()){
+    var file = files.next();
+    Logger.log(file.getName());
+  }
+  
+  Logger.log("--------------------");
+  
+  var folderName = "Google Apps Scripts Training";
+  var folders = DriveApp.getFoldersByName(folderName);
+  var folder = folders.next();
+  var contents = folder.getFiles();
+  
+  while(contents.hasNext()){
+    var f = contents.next();
+    var name = f.getName();
+    Logger.log("File Name: "+name);
+  }
+  
+}
+

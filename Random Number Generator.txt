@@ -1,0 +1,16 @@
+function myFunction() {
+  var sheet = SpreadsheetApp.getActiveSheet();
+  
+  var numberSaved = sheet.getRange(1, 1).getValue();
+  
+  Logger.log("Current Number: "+numberSaved);
+  
+  var x = Math.floor((Math.random() * 100) + 1);
+  
+  if(x > numberSaved){
+    sheet.getRange(1, 1).setValue(x); 
+  } else {
+    sheet.getRange(1, 4).setValue(x); 
+  }
+  
+}

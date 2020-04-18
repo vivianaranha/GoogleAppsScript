@@ -1,0 +1,24 @@
+function scrapeWebpage() {
+  
+  var webURL = "https://www.worldometers.info/coronavirus/";
+  
+  var response = UrlFetchApp.fetch(webURL);
+  
+  var $ = Cheerio.load(response.getContentText());
+  
+  var itemOfInterest = $('.maincounter-number').first().text().trim();
+  
+  Logger.log(itemOfInterest);
+  
+  var email_body = "<b>Number of CoronaVirus Cases: "+ itemOfInterest;
+  var subject = "Coronavirus Update "+ itemOfInterest;
+  
+  MailApp.sendEmail({
+    to: "TO_EMAILS",
+    bcc: "BCC_EMAILS",
+    subject: subject,
+    htmlBody: email_body
+  });
+  
+}
+

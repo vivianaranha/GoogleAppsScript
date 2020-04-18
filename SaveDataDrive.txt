@@ -1,0 +1,31 @@
+function myFunction() {
+  
+  var folderName = "SavingData";
+  var fileName = "data.txt";
+  
+  var dataToSave = Math.round(new Date().valueOf());
+  
+  var folders = DriveApp.getFoldersByName(folderName);
+  
+  if(folders.hasNext()){
+    var folder = folders.next();
+    
+    var existing = folder.getFilesByName(fileName);
+    
+    if(existing.hasNext()){
+      var file = existing.next();
+      if(file.getName() === fileName) {
+        Logger.log("File exist");
+        var textFromFile = file.getAs('text/plain').getDataAsString();
+        Logger.log("File Data: " + textFromFile);
+        file.setContent(dataToSave);
+      }
+    } else {
+      Logger.log("File doesn't exist");
+      folder.createFile(fileName, dataToSave); 
+    }
+    
+  }
+  
+}
+
